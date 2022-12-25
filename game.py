@@ -10,14 +10,8 @@ class Game:
         """
         self.status = True
 
-    def take_turn(self, name, symbol):
-        while True:
-            position = int(input(f"{name}, it's your turn. Input position: "))
-            if position in range(9) and position in self.squares:
-                self.squares[position] = symbol
-                break
-            else:
-                print("Invalid input. Please try again.")
+    def take_turn(self, position, symbol):
+        self.squares[position] = symbol
         self.game_board = f"""
          {self.squares[0]} | {self.squares[1]} | {self.squares[2]}  
         -----------

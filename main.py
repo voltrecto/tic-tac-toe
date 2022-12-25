@@ -1,5 +1,5 @@
 from game import Game
-from player import Player
+from player import Player, PlayerAI
 
 
 # Player 1
@@ -7,8 +7,12 @@ player1 = Player(name=input("Input Player 1 Name: "), symbol="X")
 print(f"Hello {player1.name}. You are Player 1. You are playing {player1.symbol}.")
 
 # Player 2
-player2 = Player(name=input("Input Player 2 Name: "), symbol="O")
-print(f"Hello {player2.name}. You are Player 2. You are playing {player2.symbol}.")
+# player2 = Player(name=input("Input Player 2 Name: "), symbol="O")
+# print(f"Hello {player2.name}. You are Player 2. You are playing {player2.symbol}.")
+
+# Player 2 is AI
+player2 = PlayerAI(name="AI", symbol="O")
+print(f"You're playing against AI. AI symbol is O.")
 
 # Third player object to be used as draw counter.
 draw_count = Player(name="Draw", symbol="NA")
@@ -35,7 +39,7 @@ while play_game:
             draw_count.score += 1
             game.status = False
         else:
-            game.take_turn(player.name, player.symbol)
+            game.take_turn(player.pick_position(players[(toggle + 1) % 2].symbol, game.squares), player.symbol)
             toggle = (toggle + 1) % 2
     print(f"Scores -> {player1.name}: {player1.score} {player2.name}: {player2.score} Draws: {draw_count.score}")
     if input("Do you want to keep playing? (Y/N) ") == "N":
